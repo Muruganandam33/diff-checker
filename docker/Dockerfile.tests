@@ -1,0 +1,9 @@
+# Playwright test image (Chromium is already installed in this base image).
+# The Playwright version here MUST match requirements-test.txt.
+FROM mcr.microsoft.com/playwright/python:v1.47.0-jammy
+WORKDIR /tests
+COPY requirements-test.txt .
+RUN pip install --no-cache-dir -r requirements-test.txt
+COPY tests/ .
+ENV BASE_URL=http://diff-checker-app:5000
+CMD ["pytest", "-v", "test_diff_checker.py"]

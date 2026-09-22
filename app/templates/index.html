@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diff Checker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1 id="app-message">{{ config.message }}</h1>
+    <p class="meta">
+      Environment: <strong id="app-env">{{ config.env }}</strong> |
+      Version: <strong id="app-version">{{ config.version }}</strong>
+    </p>
+
+    <form method="post" action="/" id="diff-form">
+      <div class="columns">
+        <div>
+          <label for="text_a">Text A</label>
+          <textarea id="text_a" name="text_a" rows="8">{{ text_a }}</textarea>
+        </div>
+        <div>
+          <label for="text_b">Text B</label>
+          <textarea id="text_b" name="text_b" rows="8">{{ text_b }}</textarea>
+        </div>
+      </div>
+      <button type="submit" id="compare">Compare</button>
+    </form>
+
+    {% if compared %}
+      <div id="result" class="result {{ 'identical' if identical else 'different' }}">
+        {{ 'Texts are identical' if identical else 'Texts are different' }}
+      </div>
+
+      {% if not identical %}
+        <p class="legend">"-" = only in Text A, "+" = only in Text B</p>
+        <div id="diff-output">
+          {% for kind, line in diff_lines %}
+            <div class="line {{ kind }}">{{ line }}</div>
+          {% endfor %}
+          {% if not has_line_changes %}
+            <div class="line same">Only spaces or the final new line are different.</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</body>
+</html>

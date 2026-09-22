@@ -1,0 +1,6 @@
+---
+# Change these values, run the playbook again, and the config file is updated.
+app_env: development
+app_message: Diff Checker
+app_version: "1.0"
+config_dir: "{{ playbook_dir }}/../config"

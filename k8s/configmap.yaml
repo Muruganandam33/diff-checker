@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: diff-checker-config
+  namespace: diff-checker
+data:
+  APP_ENV: "k3s"
+  APP_MESSAGE: "Diff Checker"
+  APP_VERSION: "1.0"

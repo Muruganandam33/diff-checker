@@ -1,0 +1,17 @@
+body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; }
+.container { max-width: 900px; margin: 30px auto; padding: 20px; background: #fff; border-radius: 8px; }
+h1 { margin-bottom: 5px; }
+.meta { color: #555; margin-top: 0; }
+.columns { display: flex; gap: 20px; }
+.columns > div { flex: 1; }
+label { font-weight: bold; display: block; margin-bottom: 5px; }
+textarea { width: 100%; box-sizing: border-box; font-family: monospace; }
+button { margin-top: 15px; padding: 10px 25px; background: #1976d2; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+.result { margin-top: 20px; padding: 12px; border-radius: 4px; font-weight: bold; }
+.result.identical { background: #e8f5e9; color: #2e7d32; }
+.result.different { background: #fff3e0; color: #e65100; }
+.legend { color: #555; font-size: 14px; }
+#diff-output { font-family: monospace; border: 1px solid #ddd; }
+.line { padding: 3px 8px; white-space: pre-wrap; }
+.line.removed { background: #ffebee; }
+.line.added { background: #e8f5e9; }

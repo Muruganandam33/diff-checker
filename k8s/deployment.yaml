@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diff-checker
+  namespace: diff-checker
+  labels:
+    app: diff-checker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: diff-checker
+  template:
+    metadata:
+      labels:
+        app: diff-checker
+    spec:
+      containers:
+        - name: diff-checker
+          image: diff-checker-app:1.0
+          imagePullPolicy: IfNotPresent   # use the image imported into K3s, never pull
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: diff-checker-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 3
+            periodSeconds: 5
